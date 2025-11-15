@@ -1,0 +1,28 @@
+
+
+<template>
+    <!-- html -->
+    <Person/>
+    <Person/>
+    <Person/>
+</template>
+
+<script lang="ts">
+//js/ts
+    import Person from './components/Preson.vue'
+
+
+    export default{
+        name:'App',//组件名
+        components:{Person}//注册组件
+    }
+</script>
+
+<style>
+    /* 样式 */
+    .app{
+        background-color: beige;
+        box-shadow: 0 0 10px;
+        border-radius: 10px;
+    }
+</style>

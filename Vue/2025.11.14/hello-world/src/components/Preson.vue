@@ -1,0 +1,104 @@
+
+
+<template>
+    <!-- html -->
+     <div class="person">
+        <h2>姓名：{{ name }}</h2>
+        <h2>年龄：{{ age }}</h2>
+        <button @click="changeName">修改名字</button>
+        <button @click="changeAge">修改name</button>
+        <button @click="showTel">查看联系方式</button>
+
+        <h2>一辆{{ car.brand }}车，价值{{ car.price }}万</h2>
+        <button @click="changePrice">修改汽车价值</button>
+        <button @click="changeBrand">修改品牌</button>
+
+        <h2>当前求和为:{{ sum }}</h2>
+        <button @click="changeSum">点我加1</button>
+
+        <h2>游戏列表</h2>
+        <ul>
+            <li v-for="g in games" :key="g.id">{{ g.name }}</li>
+        </ul>
+        <button @click="clickFirstGame">修改第一个游戏的名字</button>
+     </div>
+</template>
+
+<!-- <script lang="ts">
+//js/ts
+    export default{
+        name:'Person',
+        
+    }
+    
+</script> -->
+
+<script lang="ts" setup name="Person">
+    import {reactive, ref} from 'vue'
+
+
+    let car=reactive({brand:'奔驰',price:100})
+    function changePrice(){
+        car.price += 10
+    }
+    function changeBrand(){
+        car.brand='baoma'
+    }
+    function changeCar(){
+        //car=reactive({brand:'at',prize:1})
+        Object.assign(car,{brand:'at',prize:1})
+    }
+
+
+
+    let games=reactive([
+        {id:'ayasdytfsatr01',name:'wanzhe'},
+        {id:'ayasdytfsatr02',name:'yuanshen'}
+    ])
+    function clickFirstGame(){
+    // 使用 ! 避免 TypeScript 抱怨 games[0] 可能是 undefined
+        games[0]!.name='abcd' 
+    }
+
+    let sum = ref(0)
+    function changeSum(){
+        sum.value += 1
+    }
+
+
+
+    let name=ref('张三')//不是响应式的
+    let age = 18
+    let tel ='13888'
+    let address = 'beijin'
+
+    //方法
+    
+    function changeName(){
+        console.log(1)
+        name.value='zhang-san'//如此修改修改不会显现
+    }
+    function changeAge(){
+        age += 1
+    }
+    function showTel(){
+        alert(tel)
+    }
+
+
+    //return {name,age,changeName,changeAge,showTel}
+    //return ()=>'哈哈'//setup的返回值还可以是一个渲染函数
+</script>
+
+<style scoped>
+    /* 样式 */
+    .person{
+        background-color: rgb(217, 201, 134);
+        box-shadow: 0 0 10px;
+        border-radius: 10px;
+        padding: 20px;
+    }
+    button {
+        margin: 0 5px;
+    }
+</style>

@@ -1,19 +1,137 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>文档标题</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="页面描述">
-  <link rel="stylesheet" href="style.css">
-  <script>
-    console.log('页面加载中...');
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 3D 变换介绍</title>
+    <style>
+        /* * 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e3f2fd;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #00bcd4;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 5px;
+        }
+
+        /* * 3D 容器设置 */
+        .scene {
+            width: 200px;
+            height: 200px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            /* 关键 1: perspective 属性 */
+            /* perspective 决定了观察者离 3D 场景的距离，数值越小，3D 感越强 */
+            perspective: 800px; 
+        }
+
+        /* * 3D 立方体 */
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /* 关键 2: transform-style 属性 */
+            /* 必须设置为 preserve-3d 才能让子元素处于 3D 空间中 */
+            transform-style: preserve-3d; 
+            
+            /* 应用动画 */
+            animation: rotateCube 12s infinite linear;
+        }
+
+        /* * 立方体面 */
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            font-size: 24px;
+            color: white;
+            opacity: 0.8;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        /* * 3D 变换：定位立方体的六个面 */
+        .front  { background: rgba(255, 99, 71, 0.8);  transform: rotateY(0deg) translateZ(100px); }
+        .back   { background: rgba(66, 133, 244, 0.8); transform: rotateX(180deg) translateZ(100px); }
+        .right  { background: rgba(234, 67, 53, 0.8);  transform: rotateY(90deg) translateZ(100px); }
+        .left   { background: rgba(251, 188, 5, 0.8);  transform: rotateY(-90deg) translateZ(100px); }
+        .top    { background: rgba(52, 168, 83, 0.8);  transform: rotateX(90deg) translateZ(100px); }
+        .bottom { background: rgba(255, 152, 0, 0.8);  transform: rotateX(-90deg) translateZ(100px); }
+
+        /* * 动画定义 */
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <h1>欢迎使用 HTML5 标准模板</h1>
-  <!-- 页面内容 -->
-  <script src="main.js"></script>
+
+    <div class="container">
+        <h1>🧊 CSS 3D 变换：创建三维内容</h1>
+        <p>CSS 3D 效果主要依赖于两个核心属性：<code>perspective</code>（透视）和 <code>transform-style</code>（变换样式），以及 <code>transform</code> 的 3D 函数（如 <code>translateZ</code>, <code>rotateX</code>, <code>rotateY</code>）。</p>
+
+        <h2>示例：旋转的 3D 立方体</h2>
+        
+        <div class="scene">
+            <div class="cube">
+                <div class="face front">前</div>
+                <div class="face back">后</div>
+                <div class="face right">右</div>
+                <div class="face left">左</div>
+                <div class="face top">上</div>
+                <div class="face bottom">下</div>
+            </div>
+        </div>
+
+        <h2>核心 CSS 概念解析</h2>
+
+        <h3>1. <code>perspective</code> (透视)</h3>
+        <p>该属性应用于 **3D 容器**（即 <code>.scene</code>，立方体的父元素）。它定义了三维元素距离视图平面的距离，从而决定了 3D 效果的**景深**和**透视感**。</p>
+        <pre><code>.scene {
+    perspective: 800px; /* 观察者距离元素的距离 */
+}</code></pre>
+
+        <h3>2. <code>transform-style: preserve-3d</code></h3>
+        <p>该属性应用于 **父元素**（即 <code>.cube</code>），它告诉浏览器，该元素的子元素应该位于一个**三维空间**中，而不是被展平到二维平面上。**这是实现 3D 效果的关键。**</p>
+        <pre><code>.cube {
+    transform-style: preserve-3d;
+}</code></pre>
+
+        <h3>3. 3D 变换函数</h3>
+        <p>用于定位和旋转元素在三维空间中的位置，应用于具体的 3D 元素或其子元素（如 <code>.face</code>）。</p>
+        
+        <ul>
+            <li><code>translateZ(z)</code>: 沿 Z 轴（深度）移动元素。用于将立方体的面推离或拉近观察者。</li>
+            <li><code>rotateX(angle)</code>: 绕 X 轴（水平）旋转。</li>
+            <li><code>rotateY(angle)</code>: 绕 Y 轴（垂直）旋转。</li>
+            <li><code>rotateZ(angle)</code>: 绕 Z 轴（深度）旋转。</li>
+        </ul>
+
+        <pre><code>
+.front { 
+    /* 先不旋转，沿 Z 轴推入 100px */
+    transform: rotateY(0deg) translateZ(100px); 
+}
+.right { 
+    /* 先绕 Y 轴旋转 90 度，再沿 Z 轴推入 100px */
+    transform: rotateY(90deg) translateZ(100px); 
+}
+        </code></pre>
+    </div>
 </body>
 </html>
