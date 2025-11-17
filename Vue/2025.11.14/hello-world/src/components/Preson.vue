@@ -47,6 +47,16 @@
         <button @click="changeAge_1">修改age</button>
         <button @click="changePerson">修改person</button>
 
+
+        <h2>name{{ person_1.name }}</h2>
+        <h2>age{{ person_1.age }}</h2>
+        <h2>car:{{ person_1.car.c1}},{{ person_1.car.c2 }}</h2>
+        <button @click="changeName_2">change name</button>
+        <button @click="changeAge_2">change age</button>
+        <button @click="changeC1">change C1</button>
+        <button @click="changeC2">change c2</button>
+        <button @click="changeCar_2">change car</button>
+
      </div>
 </template>
 
@@ -61,6 +71,40 @@
 
 <script lang="ts" setup name="Person">
     import {reactive, ref,computed,watch} from 'vue'
+
+
+    let person_1=reactive({
+        name:'zhangsan',
+        age:18,
+        car:{
+            c1:'benchi',
+            c2:'baoma'
+        }
+    })
+
+    function changeCar_2(){
+        person_1.car={c1:'yadi',c2:'aima'}
+    }
+    function changeC2(){
+        person_1.car.c2='aodi'
+    }
+    function changeC1(){
+        person_1.car.c1='dazong'
+    }
+    function  changeAge_2(){
+        person_1.age+=1
+    }
+    function changeName_2(){
+        person_1.name+='~'
+    }
+
+    watch(()=>{return person.name},(newValue)=>{//监视值，需要getter函数，对于对象不需要；对于对象如果用函数包裹，那只能监视整体值
+        console.log("change")
+    })
+
+
+
+
 
 
     let person=reactive({

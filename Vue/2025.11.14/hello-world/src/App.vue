@@ -3,8 +3,6 @@
 <template>
     <!-- html -->
     <Person/>
-    <Person/>
-    <Person/>
 </template>
 
 <script lang="ts">
