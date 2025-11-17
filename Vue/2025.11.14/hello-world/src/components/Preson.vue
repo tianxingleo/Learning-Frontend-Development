@@ -21,6 +21,32 @@
             <li v-for="g in games" :key="g.id">{{ g.name }}</li>
         </ul>
         <button @click="clickFirstGame">修改第一个游戏的名字</button>
+        <br>
+
+        姓:<input type="text" v-model="firstName"><br></br>
+        名:<input type="text" v-model="lastName">
+        全名:<span>{{fullname}}</span>
+        <button @click="changeFullName">将全名改为li</button>
+
+        <h1>监视ref定义的基本类型数据</h1>
+        <h2>当前求和为{{ sum_1 }}</h2>
+        <button @click="changeSum_1">点我数据+1</button>
+
+
+        <h1>监视ref定义的对象类型数据</h1>
+        <h2>姓名：{{ person.name }}</h2>
+        <h2>age:{{ person.age }}</h2>
+        <button @click="changeName_1">修改名字</button>
+        <button @click="changeAge_1">修改age</button>
+        <button @click="changePerson">修改person</button>
+
+        <h1>监视reactive定义的对象类型数据</h1>
+        <h2>姓名：{{ person.name }}</h2>
+        <h2>age:{{ person.age }}</h2>
+        <button @click="changeName_1">修改名字</button>
+        <button @click="changeAge_1">修改age</button>
+        <button @click="changePerson">修改person</button>
+
      </div>
 </template>
 
@@ -34,7 +60,67 @@
 </script> -->
 
 <script lang="ts" setup name="Person">
-    import {reactive, ref} from 'vue'
+    import {reactive, ref,computed,watch} from 'vue'
+
+
+    let person=reactive({
+        name:'张三',
+        age:18
+    })
+    function changeAge_1(){
+        person.age=19
+    }
+    function changeName_1(){
+        person.name='lisi'
+    }
+    function changePerson(){
+        //person={name:'lisi',age:90}
+        Object.assign(person,{name:'lisi',age:90})
+    }
+    //监视的是对象的地址值，只有changeperson有用。检测内部变化，需要开启深度监视
+    
+    watch(person,(newValue,oldValue)=>{//reactive定义的对象类型数据默认开启深度监视
+        console.log('change')
+    })
+
+
+    
+
+    let sum_1=ref(0)
+    function changeSum_1(){
+        sum_1.value+=1
+    }
+    const stopwatch=watch(sum_1,(newvalue,oldvalue)=>{
+        console.log('change')
+        if(newvalue>=10){
+            stopwatch()
+        }
+    })
+
+
+
+
+    let firstName = ref('zhang')
+    let lastName = ref('san')
+
+    // let fullname = computed(()=>{
+    //     return firstName.value+lastName.value
+    // })
+    let fullname = computed({
+        get(){
+            return firstName.value+lastName.value
+        },
+        set(val){
+            const [str1,str2]=val.split('-')
+            firstName.value=str1!
+            lastName.value=str2!
+            console.log(1)
+        }
+    })
+
+    function changeFullName(){
+        fullname.value='li-si'
+    }
 
 
     let car=reactive({brand:'奔驰',price:100})
@@ -47,10 +133,10 @@
     function changeCar(){
         //car=reactive({brand:'at',prize:1})
         Object.assign(car,{brand:'at',prize:1})
+
+
+
     }
-
-
-
     let games=reactive([
         {id:'ayasdytfsatr01',name:'wanzhe'},
         {id:'ayasdytfsatr02',name:'yuanshen'}
@@ -93,10 +179,11 @@
 <style scoped>
     /* 样式 */
     .person{
-        background-color: rgb(217, 201, 134);
+        background-color: #66ccff;
         box-shadow: 0 0 10px;
         border-radius: 10px;
         padding: 20px;
+        margin-bottom: 20px; /* 您可以随意调整 20px 这个值 */
     }
     button {
         margin: 0 5px;
