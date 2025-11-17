@@ -57,6 +57,11 @@
         <button @click="changeC2">change c2</button>
         <button @click="changeCar_2">change car</button>
 
+
+
+        <h1>china  </h1>
+        <h2 ref="title2">beijin</h2>
+        <h3>shangguigu</h3>
      </div>
 </template>
 
@@ -70,7 +75,13 @@
 </script> -->
 
 <script lang="ts" setup name="Person">
-    import {reactive, ref,computed,watch} from 'vue'
+    import {reactive, ref,computed,watch, watchEffect,defineExpose} from 'vue'
+
+    let title2 = ref()
+    defineExpose({title2})
+
+
+
 
 
     let person_1=reactive({
@@ -98,8 +109,14 @@
         person_1.name+='~'
     }
 
-    watch(()=>{return person.name},(newValue)=>{//监视值，需要getter函数，对于对象不需要；对于对象如果用函数包裹，那只能监视整体值
+    watch(()=>{return person_1.name},(newValue)=>{//监视值，需要getter函数，对于对象不需要；对于对象如果用函数包裹，那只能监视整体值
         console.log("change")
+    })
+
+    watchEffect(()=>{
+        if(person_1.age>=0){
+            console.log('1')
+        }
     })
 
 
