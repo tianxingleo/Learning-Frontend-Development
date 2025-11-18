@@ -5,6 +5,9 @@
      <div class="person">
         <h2>当前求和为：{{ sum }}</h2>
         <button @click="add">点位+1</button>
+        <hr>   </hr>
+        <img v-for="(dog,index) in doglist" :src="dog" :key="index">
+        <button @click="getDog">111</button>
      </div>
 </template>
 
@@ -18,20 +21,12 @@
 </script> -->
 
 <script lang="ts" setup name="Preson">
-    import {type PersonInter,type Persons} from '@/types'
-    import { s ,withDefaults,ref,onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from 'vue';
+    import useSum from '@/hooks/useSum'
+    import useSDog from '@/hooks/useDog'
+import useDog from '@/hooks/useDog'
 
-    let sum=ref(0)
-    function add(){
-        sum.value += 1
-    }
-
-    onBeforeMount(()=>{})//挂载前调用里面的函数
-    onMounted(()=>{})
-    onBeforeUpdate(()=>{})//更新前
-    onUpdated(()=>{})//更新完毕
-    onBeforeUnmount(()=>{})
-    onUnmounted(()=>{})
+    const {sum,add,bigSum}=useSum()
+    const {doglist,getDog}=useDog()
 
 </script>
 
@@ -46,5 +41,8 @@
     }
     button {
         margin: 0 5px;
+    }
+    img{
+        width:100px;
     }
 </style>
