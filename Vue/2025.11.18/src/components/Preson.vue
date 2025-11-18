@@ -3,7 +3,8 @@
 <template>
     <!-- html -->
      <div class="person">
-        <li v-for="abc in list" :key="abc.id">{{abc.name}}--{{ abc.age }}</li>
+        <h2>当前求和为：{{ sum }}</h2>
+        <button @click="add">点位+1</button>
      </div>
 </template>
 
@@ -16,21 +17,21 @@
     
 </script> -->
 
-<script lang="ts" setup name="Person">
+<script lang="ts" setup name="Preson">
     import {type PersonInter,type Persons} from '@/types'
-    import { defineProps } from 'vue';
+    import { s ,withDefaults,ref,onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from 'vue';
 
-    defineProps(['a','list'])
-    //defineProps<{list:Persons}>()
-    //defineProps<{list?:Persons}>(){list:()=>[]}
+    let sum=ref(0)
+    function add(){
+        sum.value += 1
+    }
 
-
-    //let person:PersonInter = {id:'asyud7asfd01',name:'zhangsan',age:60}
-    let personlist:Persons = [
-        {id:'asyud7asfd01',name:'zhangsan',age:60},
-        {id:'asyud7asfd02',name:'zhangsan1',age:6},
-        {id:'asyud7asfd03',name:'zhangsan2',age:600}
-    ]
+    onBeforeMount(()=>{})//挂载前调用里面的函数
+    onMounted(()=>{})
+    onBeforeUpdate(()=>{})//更新前
+    onUpdated(()=>{})//更新完毕
+    onBeforeUnmount(()=>{})
+    onUnmounted(()=>{})
 
 </script>
 

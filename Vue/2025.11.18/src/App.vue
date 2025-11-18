@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import Person from './components/Preson.vue'
+import Preson from './components/Preson.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import { reactive } from 'vue'
+import { reactive ,ref} from 'vue'
 import {type Persons}from'@/types'
 
-  let personList=reactive<Persons>([
-    {id:'1',name:'zhangsan',age:18},
-    {id:'1',name:'zhangsan',age:18},
-    {id:'1',name:'zhangsan',age:18}
-  ])
+  let isShow = ref(true)
 
 </script>
 
@@ -17,7 +13,7 @@ import {type Persons}from'@/types'
   
 
   <main>
-    <Person a="哈哈" :list="personList"/>
+    <Preson v-if="isShow" />
   </main>
 </template>
 
