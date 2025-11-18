@@ -2,13 +2,22 @@
 import Person from './components/Preson.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import { reactive } from 'vue'
+import {type Persons}from'@/types'
+
+  let personList=reactive<Persons>([
+    {id:'1',name:'zhangsan',age:18},
+    {id:'1',name:'zhangsan',age:18},
+    {id:'1',name:'zhangsan',age:18}
+  ])
+
 </script>
 
 <template>
   
 
   <main>
-    <Person />
+    <Person a="哈哈" :list="personList"/>
   </main>
 </template>
 

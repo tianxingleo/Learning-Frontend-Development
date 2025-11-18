@@ -3,7 +3,7 @@
 <template>
     <!-- html -->
      <div class="person">
-        ???
+        <li v-for="abc in list" :key="abc.id">{{abc.name}}--{{ abc.age }}</li>
      </div>
 </template>
 
@@ -18,6 +18,11 @@
 
 <script lang="ts" setup name="Person">
     import {type PersonInter,type Persons} from '@/types'
+    import { defineProps } from 'vue';
+
+    defineProps(['a','list'])
+    //defineProps<{list:Persons}>()
+    //defineProps<{list?:Persons}>(){list:()=>[]}
 
 
     //let person:PersonInter = {id:'asyud7asfd01',name:'zhangsan',age:60}
