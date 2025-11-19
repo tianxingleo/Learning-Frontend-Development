@@ -24,8 +24,18 @@ const router =createRouter({
             children:[
                 {
                     name:'das',
-                    path:'detail/:id/:title/:content',
-                    component:Detail
+                    path:'detail',
+                    component:Detail,
+                    // props:true//把搜到的的paramsc:\Users\TX\AppData\Local\Temp\SGPicFaceTpBq\8760\0F6E6014.p参数作为props传给路由
+                    //第二种写法,函数写法
+                    props(route){
+                        return  route.query
+                        
+                    }
+                    //对象写法
+                    // props:{
+                    //     a:100
+                    // }
                 }
             ]
         },

@@ -7,7 +7,7 @@
         <RouterLink 
         :to="{
           name:'das',
-          params:{
+          query:{
             id:news.id,
             title:news.title,
             content:news.content
