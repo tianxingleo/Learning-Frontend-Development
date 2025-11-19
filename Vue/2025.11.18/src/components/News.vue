@@ -1,16 +1,25 @@
 <template>
   <div class="news">
     <ul>
-      <li><a href="#">新闻001</a></li>
-      <li><a href="#">新闻002</a></li>
-      <li><a href="#">新闻003</a></li>
-      <li><a href="#">新闻004</a></li>
+      <li v-for="news in NewsList" :key="news.id">
+        <RouterLink to="/news/detail">{{ news.title }}</RouterLink>
+      </li>
     </ul>
+
+  <div class="news-content">
+    <RouterView></RouterView>
+  </div>
   </div>
 </template>
 
 <script setup lang="ts" name="News">
 // 脚本内容 (此处根据截图是空的)
+  import {ref,reactive} from 'vue'
+
+  const NewsList =reactive([
+    {id:'asfdtrfay01',title:'十种抗癌植物',content:'xilanhua'},
+    {id:'asfdtrfay02',title:'how to yiyebaofu',content:'xue it'}
+  ])
 </script>
 
 <style scoped>

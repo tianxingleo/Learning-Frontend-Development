@@ -10,7 +10,7 @@ import {RouterView,RouterLink} from 'vue-router'
     <!-- 导航区 -->
      <div class="navigate">
       <RouterLink to="/home" active-class="active">首页</RouterLink>
-      <RouterLink to="/news" active-class="xiaozhupeiqi">新闻</RouterLink>
+      <RouterLink :to="{name:'xinwen'}" active-class="xiaozhupeiqi">新闻</RouterLink>
       <RouterLink :to="{path:'/about'}"active-class="xiaozhupeiqi">关于</RouterLink>
      </div>
      <!-- 暂时区 -->
