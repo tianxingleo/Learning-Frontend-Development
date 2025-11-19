@@ -1,20 +1,25 @@
 <script setup lang="ts">
-import Preson from './components/Preson.vue'
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import { reactive ,ref} from 'vue'
-import {type Persons}from'@/types'
-
-  let isShow = ref(true)
+import {RouterView,RouterLink} from 'vue-router'
 
 </script>
 
 <template>
   
+  <div class="app">
+    <h2>vue router test</h2>
+    <!-- 导航区 -->
+     <div class="navigate">
+      <RouterLink to="/home" active-class="xiaozhupeiqi">首页</RouterLink>
+      <RouterLink to="/news" active-class="xiaozhupeiqi">新闻</RouterLink>
+      <RouterLink to="/about"active-class="xiaozhupeiqi">关于</RouterLink>
+     </div>
+     <!-- 暂时区 -->
+      <div class="main-content">
+        <RouterView></RouterView>
+      </div>
+  </div>
 
-  <main>
-    <Preson v-if="isShow" />
-  </main>
+
 </template>
 
 <style scoped>
