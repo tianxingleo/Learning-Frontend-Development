@@ -1,6 +1,6 @@
 <template>
     <div class="count">
-        <h2>当前cuount：{{ countStore.sum }}</h2>
+        <h2>当前count：{{ sum }}</h2>
         <select v-model.number="n">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -15,10 +15,12 @@
 <script setup lang="ts" name="Count">
 import { ref, reactive } from 'vue';
 import { useCountStore } from '@/store/count'
+import { storeToRefs } from 'pinia';
 // let sum = ref(1)
 let n = ref(1)
 let countStore = useCountStore()
 // let sum = countStore.sum
+let { sum } = storeToRefs(countStore)
 
 function add() {
     // countStore.sum += n.value
