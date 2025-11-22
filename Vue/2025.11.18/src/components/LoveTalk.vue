@@ -16,6 +16,10 @@ import { useTalkStore } from '@/store/loveTalk';
 const talkStore = useTalkStore()
 const talkList = talkStore.talkList;
 
+talkStore.$subscribe((mutate,state)=>{
+    console.log('talkList', JSON.stringify(state.talkList));
+})
+
 function getLoveTalk() {
     talkStore.getATalk()
 }
