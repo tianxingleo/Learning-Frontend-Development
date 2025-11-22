@@ -1,6 +1,6 @@
 <template>
     <div class="count">
-        <h2>当前cuount：{{ sum }}</h2>
+        <h2>当前cuount：{{ countStore.sum }}</h2>
         <select v-model.number="n">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -14,15 +14,16 @@
 
 <script setup lang="ts" name="Count">
 import { ref, reactive } from 'vue';
-let sum = ref(1)
+import { useCountStore } from '@/store/count'
+// let sum = ref(1)
 let n = ref(1)
-
+const countStore = useCountStore()
 
 function add() {
-    sum.value += n.value
+    // sum.value += n.value
 }
 function minus() {
-    sum.value -= n.value
+    // sum.value -= n.value
 }
 </script>
 
