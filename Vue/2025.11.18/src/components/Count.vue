@@ -17,13 +17,15 @@ import { ref, reactive } from 'vue';
 import { useCountStore } from '@/store/count'
 // let sum = ref(1)
 let n = ref(1)
-const countStore = useCountStore()
+let countStore = useCountStore()
+// let sum = countStore.sum
 
 function add() {
-    // sum.value += n.value
+    // countStore.sum += n.value
+    countStore.increment(n.value)
 }
 function minus() {
-    // sum.value -= n.value
+    countStore.sum -= n.value
 }
 </script>
 
