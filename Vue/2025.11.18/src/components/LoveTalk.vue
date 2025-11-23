@@ -8,16 +8,14 @@
 </template>
 
 <script setup lang="ts" name="LoveTalk">
-import { reactive } from 'vue';
-import axios from 'axios';
-import { nanoid } from 'nanoid';
 import { useTalkStore } from '@/store/loveTalk';
 
 const talkStore = useTalkStore()
 const talkList = talkStore.talkList;
 
-talkStore.$subscribe((mutate,state)=>{
+talkStore.$subscribe((mutate, state) => {
     console.log('talkList', JSON.stringify(state.talkList));
+    localStorage.setItem('talkList', JSON.stringify(state.talkList));
 })
 
 function getLoveTalk() {
